@@ -3,41 +3,39 @@ import 'package:firebase_database/firebase_database.dart';
 
 // final databaseReference = FirebaseDatabase.instance.reference();
 
+void _saveTitleToFirebase(recipeTitle) {
+    DatabaseReference ref = FirebaseDatabase.instance.ref();
+    ref.child('LatestTitle').set({
+      'title': recipeTitle,
+    });
 
-void saveRecipeTitle(String title) async {
-
-  DatabaseReference ref = FirebaseDatabase.instance.ref("LatestTitle");
-
-    await ref.set({
-    "title": title,
-  });
 }
 
 class RecipeDetailPage extends StatelessWidget {
-  final String recipeTitle;
+  // final String recipeTitle;
+  // String recipeTitle;
 
-  const RecipeDetailPage({required this.recipeTitle, Key? key}) : super(key: key);
-
-  void _saveTitleToFirebase() {
-    // Call the function to save the recipe title to Firebase.
-    saveRecipeTitle(recipeTitle);
-    // You can also show a confirmation message here if needed.
-  }
+  const RecipeDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final String? recipeTitle =
+        ModalRoute.of(context)?.settings.arguments as String?;
     return Scaffold(
       appBar: AppBar(
-        title: Text(recipeTitle),
+        title: Text(recipeTitle ?? 'Default Title'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Recipe details go here...'), // You can add more details here.
+            const Text(
+                'Recipe details go here...'), // You can add more details here.
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _saveTitleToFirebase,
+              onPressed: () {
+    _saveTitleToFirebase(recipeTitle); // Pass the recipeTitle as a parameter
+  },
               child: const Text('Save Recipe Title to Firebase'),
             ),
           ],

@@ -4,6 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:translation_app/firebase_options.dart';
 import 'package:translation_app/views/home.dart';
+import 'package:translation_app/views/widgets/database_page.dart';
+import 'package:translation_app/views/widgets/recipe_detail.dart';
 
 Future<void> main() async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +39,13 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Colors.white),
         ),
       ),
-      home: const HomePage(),
+      // home: const HomePage(),
+            initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/recipeDetail': (context) => const RecipeDetailPage(),
+        '/databasePage': (context) => const DatabasePage(),
+      },
     );
   }
 }
