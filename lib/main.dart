@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:translation_app/firebase_options.dart';
 import 'package:translation_app/views/home.dart';
