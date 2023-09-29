@@ -8,20 +8,21 @@ import 'package:translation_app/views/widgets/database_page.dart';
 import 'package:translation_app/views/widgets/recipe_detail.dart';
 
 Future<void> main() async {
-      WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); // Säkerställer att Flutter-motorn är initialiserad.
+
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform, // Initialiserar Firebase med angivna alternativ från FirebaseOptions.
   );
 
-  DatabaseReference ref = FirebaseDatabase.instance.ref("users1/1234");
+  DatabaseReference ref = FirebaseDatabase.instance.ref("users1/1234"); // Skapar en referens till en specifik plats i Firebase-databasen.
 
   await ref.set({
     "name": "John",
     "age": 18,
     "address": {"line1": "100 Mountain View"}
-  });
+  }); // Sätter data i Firebase-databasen under den angivna referensen.
 
-  runApp(const MyApp());
+  runApp(const MyApp()); // Kör huvudapplikationen MyApp.
 }
 
 class MyApp extends StatelessWidget {
@@ -39,12 +40,11 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Colors.white),
         ),
       ),
-      // home: const HomePage(),
-            initialRoute: '/',
+      initialRoute: '/', // Ange den initiala rutten som visas när appen startar.
       routes: {
-        '/': (context) => const HomePage(),
-        '/recipeDetail': (context) => const RecipeDetailPage(),
-        '/databasePage': (context) => const DatabasePage(),
+        '/': (context) => const HomePage(), // Definiera rutten '/' för HomePage-klassen.
+        '/recipeDetail': (context) => const RecipeDetailPage(), // Definiera rutten '/recipeDetail' för RecipeDetailPage-klassen.
+        '/databasePage': (context) => const DatabasePage(), // Definiera rutten '/databasePage' för DatabasePage-klassen.
       },
     );
   }

@@ -3,6 +3,7 @@ import 'package:translation_app/models/recipe.api.dart';
 import 'package:translation_app/models/recipe.dart';
 import 'package:translation_app/views/widgets/recipe_card.dart';
 
+// En Widget som representerar startsidan i appen.
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -10,19 +11,22 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+// Den privata (underscore) State-klassen för HomePage.
 class _HomePageState extends State<HomePage> {
-  late List<Recipe> _recipes;
-  bool _isLoading = true;
+  late List<Recipe> _recipes; // En lista för att lagra receptdata.
+  bool _isLoading = true; // En flagga som indikerar om data laddas.
+
   @override
   void initState() {
     super.initState();
-    getRecipes();
+    getRecipes(); // Vid initiering, hämta receptdata.
   }
 
+  // En asynkron funktion för att hämta receptdata.
   Future<void> getRecipes() async {
-    _recipes = await RecipeApi.getRecipe();
+    _recipes = await RecipeApi.getRecipe(); // Hämta recept från API.
     setState(() {
-      _isLoading = false;
+      _isLoading = false; // Uppdatera _isLoading när data är hämtad.
     });
   }
 

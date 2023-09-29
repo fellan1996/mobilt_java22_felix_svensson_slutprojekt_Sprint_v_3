@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
+// En Widget som representerar en sida som hämtar data från Firebase-databasen.
 class DatabasePage extends StatefulWidget {
   const DatabasePage({Key? key}) : super(key: key);
 
@@ -8,19 +9,22 @@ class DatabasePage extends StatefulWidget {
   _DatabasePageState createState() => _DatabasePageState();
 }
 
+// Den privata (underscore) State-klassen för DatabasePage.
 class _DatabasePageState extends State<DatabasePage> {
-  String databaseData = "Loading...";
+  String databaseData = "Loading..."; // En sträng för att lagra hämtad data från databasen.
 
   @override
   void initState() {
     super.initState();
-    fetchDataFromDatabase();
+    fetchDataFromDatabase(); // Vid initiering, hämta data från databasen.
   }
 
+  // En funktion som hämtar data från Firebase-databasen.
   void fetchDataFromDatabase() async {
-    final ref = FirebaseDatabase.instance.ref();
-    final snapshot = await ref.child('LatestTitle/title').get();
+    final ref = FirebaseDatabase.instance.ref(); // Skapar en referens till Firebase-databasen.
+    final snapshot = await ref.child('LatestTitle/title').get(); // Hämtar data från en specifik sökväg i databasen.
     if (snapshot.exists) {
+      // Om data finns i databasen, uppdatera widgeten med den hämtade datan.
       setState(() {
         databaseData = snapshot.value.toString();
       });
